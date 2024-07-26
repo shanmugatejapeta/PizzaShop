@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4" style="color: white;">
+
+    <h1 class="text-center">Orders:</h1>
+
+    {% if note %}
+    <h2 class="text-center">{{ note }}</h2>
+    {% endif %}
+
+    {% if created_form_id %}
+    <div class="text-center mb-3">
+        <a href="{% url 'edit_form' created_form_id %}" class="btn btn-warning">Edit Your Pizza</a>
+    </div>
+    {% endif %}
+
+    <form action="{% url 'order' %}" method="POST" class="mb-3">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ pizzaform }}
+        </div>
+        <input type="submit" value="Order Pizza" class="btn btn-primary btn-sm">
+    </form>
+
+    <form action="{% url 'pizzas' %}" method="get">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ morepizzas }}
+        </div>
+        <input type="submit" value="Order More" class="btn btn-secondary btn-sm">
+
+    </form>
+</div>
+{% endblock %}

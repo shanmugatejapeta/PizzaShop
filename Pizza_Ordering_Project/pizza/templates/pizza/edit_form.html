@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4" style="color: white;">
+
+    <h1 class="text-center">Edit Pizza Order</h1>
+
+    {% if note %}
+    <div class="alert alert-info" role="alert">
+        {{ note }}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="{% url 'edit_form' pizza.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+            </form>
+            <a href="{% url 'order' %}"><button class="btn btn-primary btn-sm">Go to Orders</button></a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

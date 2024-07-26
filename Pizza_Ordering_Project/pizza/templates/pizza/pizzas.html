@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4" style="color: white;">
+
+    {% if note %}
+    <div class="alert alert-info" role="alert">
+        {{ note }}
+    </div>
+    {% endif %}
+
+    <form action="{% url 'pizzas' %}" method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        
+        {% for form in formset %}
+        <div class="form-group">
+            {{ form }}
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary btn-block">Order</button>
+    </form>
+
+</div>
+{% endblock %}
